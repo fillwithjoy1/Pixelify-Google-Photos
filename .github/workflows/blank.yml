@@ -1,7 +1,7 @@
 name: Android Build
 on:
   push:
-    branches-ignore:
+    branches:
       - '*'
 jobs:
   build:
@@ -14,3 +14,8 @@ jobs:
           java-version: '11'
       - name: Build and test app
         run: ./gradlew build
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release
+          path: app/build/outputs/apk/release/app-release.apk
