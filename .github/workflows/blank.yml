@@ -1,8 +1,8 @@
 name: Android Build
 on:
   push:
-    branches-ignore:
-      - '**'
+    branches:
+      - '*'
   pull_request:
 jobs:
   build:
