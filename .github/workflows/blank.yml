@@ -1,8 +1,8 @@
 name: Android Build
 on:
   push:
-    branches:
-      - '*'
+    branches-ignore:
+      - '**'
   pull_request:
 jobs:
   build:
@@ -15,6 +15,8 @@ jobs:
           java-version: 11
           distribution: 'adopt'
           architecture: x64
+      - name: Grant execute permission to ./gradlew
+        run: chmod +x ./gradlew
       - name: Build and test app
         run: ./gradlew build
       - name: Upload APK
