@@ -1,9 +1,7 @@
 name: Build
 on:
   push:
-    branches:
-      - fillwithjoy1-patch-one
-      - main
+    branches: ['*']
     tags:
       - '*'
 
