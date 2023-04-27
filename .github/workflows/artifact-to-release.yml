@@ -1,15 +1,17 @@
 name: Artifact to Release
 
 on:
-  workflow_run:
-    workflows: ["Build"]
-    types:
-      - completed
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Release description'
+        required: true
+        default: 'Release created from an artifact'
 
 jobs:
   artifact_to_release:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.event == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.event == 'workflow_dispatch') }}
     steps:
 
       - name: Download artifact
@@ -20,42 +22,7 @@ jobs:
             const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
               owner,
               repo,
-              run_id: context.event.workflow_run.id,
+              run_id: context.event_name === 'workflow_run' ? context.event.workflow_run.id : context.workflow_run.id,
             });
             const artifact = artifacts.data.artifacts.find(a => a.name === 'workflow-file');
-            if (!artifact) {
-              console.error('Artifact not found');
-              return;
-            }
-            const download = await github.rest.actions.downloadArtifact({
-              owner,
-              repo,
-              artifact_id: artifact.id,
-              archive_format: 'zip',
-            });
-            const fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/artifact.zip', Buffer.from(download.data));
-
-      - name: Unzip artifact
-        run: |
-          unzip artifact.zip -d artifact
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: release-${{ github.run_id }}
-          release_name: Release ${{ github.run_id }}
-          body: Release created from an artifact
-
-      - name: Upload Artifact to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifact/build.yml
-          asset_name: build.yml
-          asset_content_type: text/plain
+            if (!artifact
