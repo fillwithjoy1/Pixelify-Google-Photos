@@ -1,0 +1,34 @@
+name: Build
+on:
+  push:
+    branches:
+      - fillwithjoy1-patch-one
+      - main
+    tags:
+      - '*'
+
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Build the app
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+          
+      - name: Save workflow file
+        run: |
+          mkdir -p workflow_artifacts
+          cp .github/workflows/build.yml workflow_artifacts/
+
+      - name: Upload workflow file as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: workflow-file
+          path: workflow_artifacts/
