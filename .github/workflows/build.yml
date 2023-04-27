@@ -1,33 +1,40 @@
-name: Artifact to Release
-
+name: Build
 on:
-  workflow_run:
-    workflows: ["Build"]
-    types:
-      - completed
+  push:
+    branches:
+      - fillwithjoy1-patch-one
+      - main
+    tags:
+      - '*'
 
+  pull_request:
+  
   workflow_dispatch:
     inputs:
-      description:
-        description: 'Release description'
+      branch:
+        description: Branch to build app on
         required: true
-        default: 'Release created from an artifact'
+        default: 'main'
 
 jobs:
-  artifact_to_release:
+  build:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.event == 'workflow_dispatch') }}
     steps:
 
-      - name: Download artifact
-        uses: actions/github-script@v5
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Build the app
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+          
+      - name: Save workflow file
+        run: |
+          mkdir -p workflow_artifacts
+          cp .github/workflows/build.yml workflow_artifacts/
+      - name: Upload workflow file as artifact
+        uses: actions/upload-artifact@v3.1.2
         with:
-          script: |
-            const { owner, repo } = context.repo;
-            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-              owner,
-              repo,
-              run_id: context.event_name === 'workflow_run' ? context.event.workflow_run.id : context.workflow_run.id,
-            });
-            const artifact = artifacts.data.artifacts.find(a => a.name === 'workflow-file');
-            if (!artifact
+          name: workflow-file
+          path: workflow_artifacts/
