@@ -4,7 +4,7 @@ on:
     branches: ['*']
 
   pull_request:
-  
+
   workflow_dispatch:
     inputs:
       branch:
@@ -23,14 +23,14 @@ jobs:
       - name: Build the app
         run: |
           chmod +x gradlew
-          ./gradlew build
-          
-      - name: Save workflow file
+          ./gradlew assembleDebug
+
+      - name: Save APK file
         run: |
-          mkdir -p workflow_artifacts
-          cp .github/workflows/build.yml workflow_artifacts/
-      - name: Upload workflow file as artifact
+          mkdir -p apk_artifacts
+          cp app/build/outputs/apk/debug/*.apk apk_artifacts/
+      - name: Upload APK file as artifact
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: workflow-file
-          path: workflow_artifacts/
+          name: apk-file
+          path: apk_artifacts/
