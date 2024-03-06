@@ -21,7 +21,7 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Add Google Pixel features in Google Photos on any device." />
+            android:value="Spoof your device as an Pixel 8 to get Circle to Search." />
         <meta-data
             android:name="xposedsharedprefs"
             android:value="true" />
