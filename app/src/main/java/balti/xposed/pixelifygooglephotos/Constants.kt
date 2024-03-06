@@ -2,7 +2,7 @@ package balti.xposed.pixelifygooglephotos
 
 object Constants {
 
-    val PACKAGE_NAME_GOOGLE_PHOTOS = "com.google.android.apps.photos"
+    val PACKAGE_NAME_GOOGLE_PHOTOS = "com.google.android.googlequicksearchbox"
 
     val TELEGRAM_GROUP = "https://t.me/pixelifyGooglePhotos"
 
