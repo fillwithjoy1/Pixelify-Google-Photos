@@ -1,3 +1,6 @@
+# Fork Info
+This fork's aim is to spoof the Google app to say you are a Pixel 8 user. This is to get Circle to Search working
+
 # Pixelify-Google-Photos
 LSPosed / EdXposed module to add Google Pixel features on Google Photos for any device.  
 Tested on EdXposed by [Jim Wu](https://github.com/MlgmXyysd)  
