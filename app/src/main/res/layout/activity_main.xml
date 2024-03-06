@@ -95,45 +95,18 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingTop="10dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:id="@+id/customize_feature_flags"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/customize_feature_flags"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/feature_flags_changed"
-                android:textColor="?android:attr/colorPrimary"
-                android:alpha="0.0"
-                android:id="@+id/feature_flags_changed"
-                />
-
-        </LinearLayout>
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="25dp"/>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/override_rom_feature_levels"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="true"
+            android:enabled="false"
             android:text="@string/override_rom_feature_levels"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/override_rom_feature_levels"/>
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:layout_width="match_parent"
@@ -146,11 +119,13 @@
             android:layout_height="25dp"/>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/spoof_only_in_google_photos_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="true"
+            android:enabled="false"
             android:text="@string/spoof_only_in_google_photos"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/spoof_only_in_google_photos_switch"/>
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:layout_width="match_parent"
@@ -198,19 +173,6 @@
             android:layout_width="wrap_content"
             android:layout_height="5dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/telegram_group"
-            android:textColor="?android:attr/colorPrimary"
-            android:clickable="true"
-            android:focusable="true"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:id="@+id/telegram_group"
-            />
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="25dp"/>
@@ -221,12 +183,11 @@
             >
 
             <Button
+                android:id="@+id/force_stop_google_photos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/force_stop_google_photos"
                 android:elevation="3dp"
-                android:id="@+id/force_stop_google_photos"
-                />
+                android:text="@string/force_stop_google" />
 
             <ImageButton
                 android:layout_width="wrap_content"

@@ -29,7 +29,6 @@ import balti.xposed.pixelifygooglephotos.Constants.PREF_STRICTLY_CHECK_GOOGLE_PH
 import balti.xposed.pixelifygooglephotos.Constants.RELEASES_URL
 import balti.xposed.pixelifygooglephotos.Constants.RELEASES_URL2
 import balti.xposed.pixelifygooglephotos.Constants.SHARED_PREF_FILE_NAME
-import balti.xposed.pixelifygooglephotos.Constants.TELEGRAM_GROUP
 import balti.xposed.pixelifygooglephotos.Constants.UPDATE_INFO_URL
 import balti.xposed.pixelifygooglephotos.Constants.UPDATE_INFO_URL2
 import com.google.android.material.snackbar.Snackbar
@@ -119,15 +118,12 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
          * Link to xml views.
          */
         val resetSettings = findViewById<Button>(R.id.reset_settings)
-        val customizeFeatureFlags = findViewById<LinearLayout>(R.id.customize_feature_flags)
-        val featureFlagsChanged = findViewById<TextView>(R.id.feature_flags_changed)
         val overrideROMFeatureLevels = findViewById<SwitchCompat>(R.id.override_rom_feature_levels)
         val switchEnforceGooglePhotos = findViewById<SwitchCompat>(R.id.spoof_only_in_google_photos_switch)
         val deviceSpooferSpinner = findViewById<Spinner>(R.id.device_spoofer_spinner)
         val forceStopGooglePhotos = findViewById<Button>(R.id.force_stop_google_photos)
         val openGooglePhotos = findViewById<ImageButton>(R.id.open_google_photos)
         val advancedOptions = findViewById<TextView>(R.id.advanced_options)
-        val telegramLink = findViewById<TextView>(R.id.telegram_group)
         val updateAvailableLink = findViewById<TextView>(R.id.update_available_link)
         val confExport = findViewById<ImageButton>(R.id.conf_export)
         val confImport = findViewById<ImageButton>(R.id.conf_import)
@@ -207,8 +203,7 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
                         )
                         apply()
                     }
-
-                    peekFeatureFlagsChanged(featureFlagsChanged)
+                    
                     showRebootSnack()
                 }
 
@@ -235,23 +230,6 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
          */
         openGooglePhotos.setOnClickListener {
             utils.openApplication(Constants.PACKAGE_NAME_GOOGLE_PHOTOS, this)
-        }
-
-        /**
-         * Launch [FeatureCustomize] to fine select the features.
-         */
-        customizeFeatureFlags.setOnClickListener {
-            childActivityLauncher.launch(Intent(this, FeatureCustomize::class.java))
-        }
-
-        /**
-         * Open telegram group.
-         */
-        telegramLink.apply {
-            paintFlags = Paint.UNDERLINE_TEXT_FLAG
-            setOnClickListener {
-                openWebLink(TELEGRAM_GROUP)
-            }
         }
 
         /**
