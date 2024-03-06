@@ -1,15 +1,15 @@
-package balti.xposed.pixelifygooglephotos
+package google.cts.enabler
 
 import android.app.Activity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import balti.xposed.pixelifygooglephotos.Constants.PREF_DEVICE_TO_SPOOF
-import balti.xposed.pixelifygooglephotos.Constants.PREF_ENABLE_VERBOSE_LOGS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
-import balti.xposed.pixelifygooglephotos.Constants.SHARED_PREF_FILE_NAME
+import google.cts.enabler.Constants.PREF_DEVICE_TO_SPOOF
+import google.cts.enabler.Constants.PREF_ENABLE_VERBOSE_LOGS
+import google.cts.enabler.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
+import google.cts.enabler.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
+import google.cts.enabler.Constants.SHARED_PREF_FILE_NAME
 
 class AdvancedOptionsActivity: AppCompatActivity(R.layout.advanced_options_activity) {
 
@@ -34,7 +34,9 @@ class AdvancedOptionsActivity: AppCompatActivity(R.layout.advanced_options_activ
         /**
          * Get the current spoofing device an its android version.
          */
-        val deviceNameInPreference = pref.getString(PREF_DEVICE_TO_SPOOF, DeviceProps.defaultDeviceName)
+        val deviceNameInPreference = pref.getString(PREF_DEVICE_TO_SPOOF,
+            DeviceProps.defaultDeviceName
+        )
         val spoofDevice = DeviceProps.getDeviceProps(deviceNameInPreference)
         deviceNameLabel.text = spoofDevice?.deviceName
         deviceAndroidVersion.text = spoofDevice?.androidVersion?.label

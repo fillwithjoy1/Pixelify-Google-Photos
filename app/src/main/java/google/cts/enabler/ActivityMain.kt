@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos
+package google.cts.enabler
 
 import android.app.Activity
 import android.content.Intent
@@ -16,21 +16,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.FileProvider
-import balti.xposed.pixelifygooglephotos.Constants.CONF_EXPORT_NAME
-import balti.xposed.pixelifygooglephotos.Constants.FIELD_LATEST_VERSION_CODE
-import balti.xposed.pixelifygooglephotos.Constants.PREF_DEVICE_TO_SPOOF
-import balti.xposed.pixelifygooglephotos.Constants.PREF_ENABLE_VERBOSE_LOGS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_LAST_VERSION
-import balti.xposed.pixelifygooglephotos.Constants.PREF_OVERRIDE_ROM_FEATURE_LEVELS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_FEATURES_LIST
-import balti.xposed.pixelifygooglephotos.Constants.PREF_STRICTLY_CHECK_GOOGLE_PHOTOS
-import balti.xposed.pixelifygooglephotos.Constants.RELEASES_URL
-import balti.xposed.pixelifygooglephotos.Constants.RELEASES_URL2
-import balti.xposed.pixelifygooglephotos.Constants.SHARED_PREF_FILE_NAME
-import balti.xposed.pixelifygooglephotos.Constants.UPDATE_INFO_URL
-import balti.xposed.pixelifygooglephotos.Constants.UPDATE_INFO_URL2
+import google.cts.enabler.Constants.CONF_EXPORT_NAME
+import google.cts.enabler.Constants.FIELD_LATEST_VERSION_CODE
+import google.cts.enabler.Constants.PREF_DEVICE_TO_SPOOF
+import google.cts.enabler.Constants.PREF_ENABLE_VERBOSE_LOGS
+import google.cts.enabler.Constants.PREF_LAST_VERSION
+import google.cts.enabler.Constants.PREF_OVERRIDE_ROM_FEATURE_LEVELS
+import google.cts.enabler.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
+import google.cts.enabler.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
+import google.cts.enabler.Constants.PREF_SPOOF_FEATURES_LIST
+import google.cts.enabler.Constants.PREF_STRICTLY_CHECK_GOOGLE_PHOTOS
+import google.cts.enabler.Constants.RELEASES_URL
+import google.cts.enabler.Constants.RELEASES_URL2
+import google.cts.enabler.Constants.SHARED_PREF_FILE_NAME
+import google.cts.enabler.Constants.UPDATE_INFO_URL
+import google.cts.enabler.Constants.UPDATE_INFO_URL2
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -107,7 +107,7 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
         if (pref == null){
             AlertDialog.Builder(this)
                 .setMessage(R.string.module_not_enabled)
-                .setPositiveButton(R.string.close) {_, _ ->
+                .setPositiveButton(R.string.close) { _, _ ->
                     finish()
                 }
                 .setCancelable(false)
@@ -188,7 +188,9 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
 
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             adapter = aa
-            val defaultSelection = pref?.getString(PREF_DEVICE_TO_SPOOF, DeviceProps.defaultDeviceName)
+            val defaultSelection = pref?.getString(PREF_DEVICE_TO_SPOOF,
+                DeviceProps.defaultDeviceName
+            )
             /** Second argument is `false` to prevent calling [peekFeatureFlagsChanged] on initialization */
             setSelection(aa.getPosition(defaultSelection), false)
 
@@ -240,10 +242,10 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
             AlertDialog.Builder(this).apply {
                 setTitle(R.string.export_config)
                 setMessage(R.string.export_config_desc)
-                setPositiveButton(R.string.share){_, _ ->
+                setPositiveButton(R.string.share){ _, _ ->
                     shareConfFile()
                 }
-                setNegativeButton(R.string.save){_, _ ->
+                setNegativeButton(R.string.save){ _, _ ->
                     saveConfFile()
                 }
                 setNeutralButton(android.R.string.cancel, null)

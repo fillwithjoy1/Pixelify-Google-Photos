@@ -1,12 +1,12 @@
-package balti.xposed.pixelifygooglephotos
+package google.cts.enabler
 
 import android.util.Log
-import balti.xposed.pixelifygooglephotos.Constants.PACKAGE_NAME_GOOGLE_PHOTOS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_ENABLE_VERBOSE_LOGS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_OVERRIDE_ROM_FEATURE_LEVELS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_FEATURES_LIST
-import balti.xposed.pixelifygooglephotos.Constants.PREF_STRICTLY_CHECK_GOOGLE_PHOTOS
-import balti.xposed.pixelifygooglephotos.Constants.SHARED_PREF_FILE_NAME
+import google.cts.enabler.Constants.PACKAGE_NAME_GOOGLE_PHOTOS
+import google.cts.enabler.Constants.PREF_ENABLE_VERBOSE_LOGS
+import google.cts.enabler.Constants.PREF_OVERRIDE_ROM_FEATURE_LEVELS
+import google.cts.enabler.Constants.PREF_SPOOF_FEATURES_LIST
+import google.cts.enabler.Constants.PREF_STRICTLY_CHECK_GOOGLE_PHOTOS
+import google.cts.enabler.Constants.SHARED_PREF_FILE_NAME
 import de.robv.android.xposed.*
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 

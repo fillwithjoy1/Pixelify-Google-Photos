@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos
+package google.cts.enabler
 
 object Constants {
 

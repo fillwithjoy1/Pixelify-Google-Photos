@@ -1,2 +1,2 @@
-balti.xposed.pixelifygooglephotos.FeatureSpoofer
-balti.xposed.pixelifygooglephotos.DeviceSpoofer
+google.cts.enabler.FeatureSpoofer
+google.cts.enabler.DeviceSpoofer
